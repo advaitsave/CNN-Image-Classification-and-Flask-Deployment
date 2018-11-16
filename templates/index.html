@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<html>
+<head>
+	<title>CNN Image classification</title>
+</head>
+
+
+<style>
+body {
+  font: 20px sans-serif;
+}
+  </style>
+
+
+<body>
+
+<p>Enter the URL to an image for a model prediction!</p>
+
+<form action="/predict_object/" method="post">
+Image URL:<br>
+  <input type="text" name="image_url" style="width: 600px;">
+<br>
+
+<button type="submit" style="font:20px">
+  Predict
+</button>
+</form>
+
+
+{% if message %}
+<p>{{message}}</p><br>
+
+
+{% if data.shape[0] > 0 %}  
+
+{{ data.reset_index(drop = True).to_html(classes="table table-striped") | safe}}
+
+{% endif %}
+
+<p><img src="{{image_url}}" style='width:500px'/><br>
+
+{% endif %}
+
+</body>
+</html>
